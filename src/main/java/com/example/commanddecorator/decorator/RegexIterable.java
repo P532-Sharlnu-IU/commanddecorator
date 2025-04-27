@@ -49,31 +49,23 @@ public class RegexIterable<T> implements Iterable<T> {
                     throw new NoSuchElementException();
                 }
                 T result = nextMatch;
-                hasNextComputed = false;  // reset for subsequent calls
+                hasNextComputed = false;
                 return result;
             }
         };
     }
 
     public static void demo(){
-        // --- DECORATOR PATTERN DEMO ---
+
         System.out.println("\n-------RegexIterable---------");
         List<String> items = Arrays.asList("apple", "banana", "avocado", "cherry", "aardvark","pearl");
-//        RegexIterable<String> startsWithA = new RegexIterable<>(items, "^a.*");
-//
-//        for (String s : startsWithA) {
-//            System.out.println(s);
-//        }
 
-        // 1) Read a regex from the user
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter a regular expression to filter the list: ");
         String inputRegex = scanner.nextLine();
 
-        // 2) Apply the decorator with that regex
         RegexIterable<String> filtered = new RegexIterable<>(items, inputRegex);
 
-        // 3) Print out the matching elements
         System.out.println("\n---- Items matching \"" + inputRegex + "\" ------");
         for (String s : filtered) {
             System.out.println(s);
